@@ -3,15 +3,15 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./layout/Layout";
 
 // Landing Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Solutions from "./pages/Solutions";
-import Features from "./pages/Features";
-import HowItWorks from "./pages/HowItWorks";
-import Franchise from "./pages/Franchise";
-import Contact from "./pages/Contact";
-import Login from "./pages/Login";
+import Home from "./page/Home";
+import About from "./page/About";
+import Services from "./page/Services";
+import Solutions from "./page/Solutions";
+import Features from "./page/Features";
+import HowItWorks from "./page/HowItWorks";
+import Franchise from "./page/Franchise";
+import Contact from "./page/Contact";
+import Login from "./page/Login";
 
 // Layouts with Outlet
 import SuperAdminLayout from "./layouts/SuperAdminLayout";
