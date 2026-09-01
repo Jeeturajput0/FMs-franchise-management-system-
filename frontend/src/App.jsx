@@ -1,15 +1,18 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import LandingPage from "./features/landing/LandingPage";
+import LoginPage from "./features/auth/LoginPage";
+import DashboardPage from "./features/admin/dashboard/DashboardPage";
 import "./App.css";
 
-function App() {
-
+export default function App() {
   return (
-    <>
-      <div>
-        <h1>the new page </h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati accusantium assumenda voluptatem nulla adipisci! Fugit reiciendis mollitia nostrum officia odit expedita quis harum laudantium labore? Totam exercitationem itaque qui nihil?</p>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin/dashboard" element={<DashboardPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
