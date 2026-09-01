@@ -1,10 +1,14 @@
+
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+
 import DashboardSidebar from "../components/dashboard/DashboardSidebar";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
+
 import { NAVIGATION_CONFIG } from "../config/navigation";
 import { ROLES } from "../config/roles";
 
-export default function CoachingAdminLayout({ children }) {
+export default function CoachingAdminLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentUser = {
@@ -29,9 +33,10 @@ export default function CoachingAdminLayout({ children }) {
           user={currentUser}
         />
 
-        <div className="content">{children}</div>
+        <div className="content">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
 }
-
