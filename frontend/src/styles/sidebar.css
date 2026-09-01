@@ -1,0 +1,103 @@
+/* Sidebar Styles */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #ebebf2;
+  padding: 24px 14px 14px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.side-brand {
+  padding: 0 10px;
+}
+
+.workspace {
+  border: 1px solid #eceaf5;
+  background: #faf9fd;
+  border-radius: 10px;
+  margin: 20px 0 16px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.side-nav {
+  overflow-y: auto;
+  padding: 0 2px;
+  flex: 1;
+}
+
+.nav-item {
+  background: none;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  color: #6c687b;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #f8f6fe;
+  color: #7154db;
+}
+
+.nav-item.active {
+  background: #f0ebff;
+  color: #684aca;
+  font-weight: 700;
+}
+
+.subnav {
+  margin: 4px 0 8px 36px;
+  border-left: 2px solid #e7e3f0;
+  display: grid;
+  gap: 2px;
+}
+
+.subnav button {
+  background: none;
+  text-align: left;
+  color: #827d90;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+  cursor: pointer;
+}
+
+.subnav button:hover,
+.subnav .subactive {
+  color: #7153d9;
+  font-weight: 700;
+}
+
+.side-footer {
+  margin-top: auto;
+  border-top: 1px solid #eeeef3;
+  padding-top: 12px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #faf9fd;
+}
+

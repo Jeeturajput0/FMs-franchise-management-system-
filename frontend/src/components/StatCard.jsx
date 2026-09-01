@@ -1,21 +1,34 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import Icon from "./Icon";
 
-export default function StatCard({ label, count, detail, index = 0 }) {
+export default function StatCard({ label, value, change, icon = "grid", tone = "violet" }) {
+  const toneStyles = {
+    violet: "bg-[#eee8ff] text-[#7355d9]",
+    blue: "bg-[#e7f3ff] text-[#5194df]",
+    orange: "bg-[#fff1df] text-[#e39843]",
+    green: "bg-[#e5f7ed] text-[#52a978]",
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-lg text-center hover:border-amber-300 transition-all group"
-    >
-      <div className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-1 group-hover:text-amber-500 transition-colors">
-        {count}
+    <article className="stat-card">
+      <div className={`stat-icon ${toneStyles[tone] ? tone : "violet"}`}>
+        <Icon name={icon} size={20} />
       </div>
-      <div className="text-sm font-bold text-gray-800 mb-0.5">{label}</div>
-      {detail && <div className="text-xs text-gray-500 font-medium">{detail}</div>}
-    </motion.div>
+
+      <button type="button" aria-label="More options" className="text-gray-400 hover:text-gray-600">
+        <Icon name="more" size={18} />
+      </button>
+
+      <p>{label}</p>
+
+      <h2>{value}</h2>
+
+      {change && (
+        <small>
+          <b>↑</b> {change}
+        </small>
+      )}
+    </article>
   );
 }
 

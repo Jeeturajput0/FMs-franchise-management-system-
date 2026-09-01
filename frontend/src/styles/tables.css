@@ -1,0 +1,35 @@
+/* Tables & List Items */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.table-custom th {
+  background-color: #faf9fc;
+  color: #6c687b;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e7e5ed;
+}
+
+.table-custom td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0eff4;
+  color: #25213a;
+}
+
+.table-custom tr:hover {
+  background-color: #fcfbfe;
+}
+

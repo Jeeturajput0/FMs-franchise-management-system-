@@ -1,0 +1,30 @@
+/* Form Control & Input Styles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #25213a;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 13px;
+  border: 1px solid #dedbe8;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #ffffff;
+}
+
+.form-control:focus {
+  border-color: #7154db;
+  box-shadow: 0 0 0 3px rgba(113, 84, 219, 0.12);
+}
+
