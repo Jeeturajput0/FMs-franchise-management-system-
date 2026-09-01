@@ -1,57 +1,53 @@
 import React from "react";
-import SuperAdminLayout from "../../../layouts/SuperAdminLayout";
 import PageHeader from "../../../components/PageHeader";
 import DataTable from "../../../components/DataTable";
-import Badge from "../../../components/Badge";
 import { superAdminUsers } from "../../../data/superAdminData";
 
 export default function AdminList() {
   const columns = [
     { header: "ID", accessor: "id" },
-    { header: "User Name", accessor: "name" },
+    { header: "Admin / Staff Name", accessor: "name" },
     { header: "Email Address", accessor: "email" },
     {
-      header: "Role",
+      header: "Role Permission",
       accessor: "role",
       render: (row) => (
-        <Badge variant="purple">
-          {row.role.replace("_", " ").toUpperCase()}
-        </Badge>
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-200">
+          {row.role.replace("_", " ")}
+        </span>
       ),
     },
-    { header: "Organization", accessor: "org" },
-    { header: "Status", accessor: "status", isBadge: true },
-    { header: "Last Active", accessor: "lastActive" },
+    { header: "Branch / Org", accessor: "org" },
+    { header: "Account Status", accessor: "status", isBadge: true },
+    { header: "Last Activity", accessor: "lastActive" },
   ];
 
   const roleFilterOptions = [
     { label: "Super Admins", value: "super_admin" },
     { label: "Coaching Admins", value: "coaching_admin" },
     { label: "Teachers", value: "teacher" },
-    { label: "Students", value: "student" },
     { label: "Franchise Owners", value: "franchise_owner" },
   ];
 
   return (
-    <SuperAdminLayout>
+    <div className="space-y-6">
       <PageHeader
-        crumb="ADMIN PORTAL / USER MANAGEMENT"
-        title="Network User Management"
-        subtitle="Control accounts and permissions across all 5 platform roles."
-        actionLabel="+ Add New User"
-        onAction={() => alert("Add New User")}
+        crumb="ADMINS / TEAM"
+        title="Administrative Team & Role Permissions"
+        subtitle="Manage access control, permissions, and security policies for HQ and regional staff."
+        actionLabel="Add Admin User"
+        onAction={() => alert("Add Admin User Modal")}
       />
 
       <DataTable
-        title="User Accounts & Role Permissions"
-        subtitle="Super Admins, Coaching Admins, Teachers, Students, Franchise Owners"
+        title="Platform Staff & Regional Administrators"
+        subtitle="Manage authorization levels and active sessions"
         columns={columns}
         data={superAdminUsers}
         filterOptions={roleFilterOptions}
-        actionButtonLabel="+ Create Admin Account"
+        actionButtonLabel="+ Add Admin"
         onActionButtonClick={() => alert("Create Admin Account")}
       />
-    </SuperAdminLayout>
+    </div>
   );
 }
-

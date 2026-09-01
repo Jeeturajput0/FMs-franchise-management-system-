@@ -1,91 +1,129 @@
 import React from "react";
-import SuperAdminLayout from "../../layouts/SuperAdminLayout";
 import PageHeader from "../../components/PageHeader";
 import StatCard from "../../components/StatCard";
 import ChartCard from "../../components/ChartCard";
 import ActivityList from "../../components/dashboard/ActivityList";
 import QuickActions from "../../components/dashboard/QuickActions";
-import Icon from "../../components/Icon";
-import {
-  superAdminStats,
-  superAdminActivity,
-  superAdminFranchises,
+import { 
+  superAdminStats, 
+  superAdminActivity, 
+  superAdminFranchises 
 } from "../../data/superAdminData";
+import { ChevronRight, ArrowUpRight, Award, Building2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function SuperAdminDashboard() {
+  const navigate = useNavigate();
+
   return (
-    <SuperAdminLayout>
+    <div className="space-y-6">
       <PageHeader
-        crumb="ADMIN PORTAL / OVERVIEW"
-        title="Good morning, Arjun"
-        subtitle="Here's what's happening across your learning network today."
-        actionLabel="+ Add Franchise"
-        onAction={() => alert("Add Franchise modal")}
+        crumb="HQ OVERVIEW"
+        title="Good morning, Arjun 👋"
+        subtitle="Here's a real-time summary across your 48 learning franchises and AI centers today."
+        actionLabel="Add Franchise"
+        onAction={() => navigate("/admin/franchises/add")}
       />
 
       <QuickActions
         actions={[
-          { label: "+ New Franchise", onClick: () => alert("New Franchise") },
-          { label: "+ Add Course", onClick: () => alert("Add Course") },
-          { label: "User Management", onClick: () => window.location.href = "/admin/admins" },
-          { label: "Generate Reports", onClick: () => alert("Reports") },
+          { label: "+ Add Franchise", onClick: () => navigate("/admin/franchises/add"), variant: "primary" },
+          { label: "+ Create Course", onClick: () => navigate("/admin/courses") },
+          { label: "Manage Admins", onClick: () => navigate("/admin/admins") },
+          { label: "Fee Collections", onClick: () => navigate("/admin/fees") },
+          { label: "Generate Reports", onClick: () => navigate("/admin/reports") },
         ]}
       />
 
-      {/* Top Stats */}
-      <section className="stats-grid">
+      {/* Top Key Stats */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {superAdminStats.map((st, idx) => (
           <StatCard key={idx} {...st} />
         ))}
       </section>
 
-      {/* Performance & Activity */}
-      <section className="dashboard-grid">
-        <ChartCard
-          title="Learning performance"
-          subtitle="Student enrollments & completions"
-        />
+      {/* Performance Charts & Activity */}
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <ChartCard
+            title="Admissions & Completions Analytics"
+            subtitle="Monthly student enrollments vs course certifications across centers"
+          />
+        </div>
 
-        <ActivityList items={superAdminActivity} />
+        <div>
+          <ActivityList items={superAdminActivity} />
+        </div>
       </section>
 
-      {/* Top Franchises Panel */}
-      <section className="panel franchise-panel">
-        <div className="panel-head">
+      {/* Top Franchises Leaderboard */}
+      <section className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs">
+        <div className="flex items-center justify-between mb-5 pb-4 border-b border-slate-100">
           <div>
-            <h3>Top performing franchises</h3>
-            <p>Based on enrollments this month</p>
+            <h3 className="text-base font-bold text-slate-900">Top Performing Franchises</h3>
+            <p className="text-xs text-slate-500 mt-0.5">Ranked by monthly student enrollments & retention</p>
           </div>
-          <button type="button" className="text-button">
-            View all <Icon name="arrow" size={15} />
+          <button
+            type="button"
+            onClick={() => navigate("/admin/franchises")}
+            className="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 cursor-pointer"
+          >
+            <span>View All Franchises</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        {superAdminFranchises.map((fr, index) => (
-          <div className="franchise-row" key={fr.id}>
-            <span className="rank">{`0${index + 1}`}</span>
-            <span className="academy-logo">{fr.name.slice(0, 2).toUpperCase()}</span>
-            <div className="academy">
-              <b>{fr.name}</b>
-              <small>{fr.city} • Owner: {fr.owner}</small>
+        <div className="divide-y divide-slate-100">
+          {superAdminFranchises.map((fr, index) => (
+            <div
+              key={fr.id}
+              onClick={() => navigate(`/admin/franchises/${fr.id}`)}
+              className="py-3.5 flex items-center justify-between gap-4 hover:bg-slate-50/80 px-3 -mx-3 rounded-xl transition-colors cursor-pointer group"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="font-mono text-xs font-bold text-slate-400 w-6">
+                  {`0${index + 1}`}
+                </span>
+                <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xs shrink-0">
+                  {fr.name.slice(0, 2).toUpperCase()}
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-amber-600 transition-colors truncate">
+                    {fr.name}
+                  </h4>
+                  <p className="text-[11px] text-slate-400 truncate">
+                    {fr.city} • Owner: <span className="text-slate-600 font-medium">{fr.owner}</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="hidden sm:flex items-center gap-8 text-right">
+                <div>
+                  <span className="text-xs font-extrabold text-slate-900 block">{fr.students}</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">Students</span>
+                </div>
+                
+                <div className="w-28 hidden md:block text-left">
+                  <div className="flex justify-between text-[10px] font-bold text-slate-600 mb-1">
+                    <span>Target</span>
+                    <span>{fr.progress}</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-amber-500 rounded-full" style={{ width: fr.progress }}></div>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <span className="text-xs font-bold text-emerald-600 block">{fr.revenue}</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">Revenue</span>
+                </div>
+              </div>
+
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-amber-600 transition-all" />
             </div>
-            <div className="enrolled">
-              <b>{fr.students}</b>
-              <small>enrolled</small>
-            </div>
-            <div className="progress">
-              <span>
-                <i style={{ width: fr.progress }} />
-              </span>
-              <small>{fr.progress} completion</small>
-            </div>
-            <button type="button" className="row-arrow" aria-label={`Open ${fr.name}`}>
-              <Icon name="chevron" size={17} />
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
-    </SuperAdminLayout>
+    </div>
   );
 }
-

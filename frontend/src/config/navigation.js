@@ -8,10 +8,10 @@ export const NAVIGATION_CONFIG = {
       icon: "building",
       path: "/admin/franchises",
       children: [
-        { label: "Add Franchise", path: "/admin/franchises/add" },
-        { label: "All Franchises", path: "/admin/franchises" },
-        { label: "Franchise Details", path: "/admin/franchises/101" },
-        { label: "Franchise Reports", path: "/admin/franchises/reports" },
+        { label: "Add", path: "/admin/franchises/add" },
+        { label: "View", path: "/admin/franchises" },
+        { label: "Edit", path: "/admin/franchises/edit" },
+        { label: "Reports", path: "/admin/franchises/reports" },
       ],
     },
     {
@@ -33,9 +33,9 @@ export const NAVIGATION_CONFIG = {
       icon: "wallet",
       path: "/admin/fees",
       children: [
-        { label: "Registration Fees", path: "/admin/fees/registration" },
-        { label: "Course Fees", path: "/admin/fees/course" },
-        { label: "Certificate Fees", path: "/admin/fees/certificate" },
+        { label: "Registration", path: "/admin/fees/registration" },
+        { label: "Course", path: "/admin/fees/course" },
+        { label: "Certificate", path: "/admin/fees/certificate" },
         { label: "Payment History", path: "/admin/fees/history" },
       ],
     },
@@ -47,17 +47,17 @@ export const NAVIGATION_CONFIG = {
       icon: "chart",
       path: "/admin/reports",
       children: [
+        { label: "All Reports", path: "/admin/reports" },
         { label: "Revenue Reports", path: "/admin/reports/revenue" },
         { label: "Student Reports", path: "/admin/reports/students" },
         { label: "Franchise Reports", path: "/admin/reports/franchise" },
-        { label: "Performance Reports", path: "/admin/reports/performance" },
       ],
     },
     { label: "Settings", icon: "settings", path: "/admin/settings" },
   ],
 
   [ROLES.COACHING_ADMIN]: [
-    { label: "Dashboard", icon: "grid", path: "/dashboard/coaching-admin" },
+    { label: "Overview", icon: "grid", path: "/dashboard/coaching-admin" },
     {
       label: "Students",
       icon: "users",
@@ -97,7 +97,7 @@ export const NAVIGATION_CONFIG = {
   ],
 
   [ROLES.TEACHER]: [
-    { label: "Dashboard", icon: "grid", path: "/dashboard/teacher" },
+    { label: "Overview", icon: "grid", path: "/dashboard/teacher" },
     { label: "My Courses", icon: "book", path: "/dashboard/teacher/courses" },
     { label: "My Batches", icon: "layers", path: "/dashboard/teacher/batches" },
     { label: "My Students", icon: "users", path: "/dashboard/teacher/students" },
@@ -111,7 +111,7 @@ export const NAVIGATION_CONFIG = {
   ],
 
   [ROLES.STUDENT]: [
-    { label: "Dashboard", icon: "grid", path: "/dashboard/student" },
+    { label: "Overview", icon: "grid", path: "/dashboard/student" },
     { label: "My Courses", icon: "book", path: "/dashboard/student/courses" },
     { label: "Assignments", icon: "fileText", path: "/dashboard/student/assignments", badge: "3" },
     { label: "Tests", icon: "clock", path: "/dashboard/student/tests" },
@@ -124,7 +124,7 @@ export const NAVIGATION_CONFIG = {
   ],
 
   [ROLES.FRANCHISE_OWNER]: [
-    { label: "Dashboard", icon: "grid", path: "/dashboard/franchise-owner" },
+    { label: "Overview", icon: "grid", path: "/dashboard/franchise-owner" },
     { label: "Admissions", icon: "userPlus", path: "/dashboard/franchise-owner/admissions" },
     { label: "Students", icon: "users", path: "/dashboard/franchise-owner/students" },
     { label: "Teachers", icon: "userCheck", path: "/dashboard/franchise-owner/teachers" },
@@ -140,4 +140,3 @@ export const NAVIGATION_CONFIG = {
     { label: "Settings", icon: "settings", path: "/dashboard/franchise-owner/settings" },
   ],
 };
-

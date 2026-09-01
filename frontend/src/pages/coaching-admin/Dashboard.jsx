@@ -1,11 +1,9 @@
 import React from "react";
-import CoachingAdminLayout from "../../layouts/CoachingAdminLayout";
 import PageHeader from "../../components/PageHeader";
 import StatCard from "../../components/StatCard";
 import ChartCard from "../../components/ChartCard";
 import QuickActions from "../../components/dashboard/QuickActions";
 import DataTable from "../../components/DataTable";
-import Icon from "../../components/Icon";
 import {
   coachingAdminStats,
   coachingAdminTodayClasses,
@@ -14,7 +12,7 @@ import {
 
 export default function CoachingAdminDashboard() {
   return (
-    <CoachingAdminLayout>
+    <div className="space-y-6">
       <PageHeader
         crumb="COACHING PORTAL / DASHBOARD"
         title="Bright Minds Coaching Institute"
@@ -25,7 +23,7 @@ export default function CoachingAdminDashboard() {
 
       <QuickActions
         actions={[
-          { label: "+ Add Student", onClick: () => alert("Add Student") },
+          { label: "+ Add Student", onClick: () => alert("Add Student"), variant: "primary" },
           { label: "+ Add Teacher", onClick: () => alert("Add Teacher") },
           { label: "+ Create Batch", onClick: () => alert("Create Batch") },
           { label: "+ Collect Fee", onClick: () => alert("Collect Fee") },
@@ -33,53 +31,55 @@ export default function CoachingAdminDashboard() {
       />
 
       {/* Cards */}
-      <section className="stats-grid">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {coachingAdminStats.map((st, idx) => (
           <StatCard key={idx} {...st} />
         ))}
       </section>
 
       {/* Analytics & Today's Classes */}
-      <section className="dashboard-grid">
-        <ChartCard
-          title="Student Growth & Revenue"
-          subtitle="Monthly student admissions and collection"
-        />
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <ChartCard
+            title="Student Growth & Revenue"
+            subtitle="Monthly student admissions and collection"
+          />
+        </div>
 
         {/* Today's Schedule Panel */}
-        <article className="panel">
-          <div className="panel-head">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
             <div>
-              <h3>Today's Classes Schedule</h3>
-              <p>Active lectures & lab sessions</p>
+              <h3 className="text-sm font-bold text-slate-900">Today's Class Schedule</h3>
+              <p className="text-xs text-slate-500">Active lectures & lab sessions</p>
             </div>
-            <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-bold">
+            <span className="text-[10px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-bold">
               4 Classes
             </span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {coachingAdminTodayClasses.map((cls, idx) => (
               <div
                 key={idx}
-                className="p-3 border border-gray-100 rounded-xl bg-gray-50/60 flex items-center justify-between gap-3 text-xs"
+                className="p-3 border border-slate-100 rounded-xl bg-slate-50 flex items-center justify-between gap-3 text-xs"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-[#7154db] font-mono">{cls.time}</span>
-                    <span className="font-bold text-[#25213a]">{cls.title}</span>
+                    <span className="font-bold text-amber-600 font-mono">{cls.time}</span>
+                    <span className="font-bold text-slate-800">{cls.title}</span>
                   </div>
-                  <small className="text-gray-500 block mt-0.5">
+                  <small className="text-slate-500 block mt-0.5">
                     {cls.batch} • {cls.room} • Faculty: {cls.teacher}
                   </small>
                 </div>
                 <div className="text-right">
-                  <span className="font-semibold text-gray-700">{cls.students} Students</span>
+                  <span className="font-semibold text-slate-700">{cls.students} Students</span>
                 </div>
               </div>
             ))}
           </div>
-        </article>
+        </div>
       </section>
 
       {/* Recent Students Roster */}
@@ -97,7 +97,6 @@ export default function CoachingAdminDashboard() {
         ]}
         data={coachingAdminStudents}
       />
-    </CoachingAdminLayout>
+    </div>
   );
 }
-

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import StudentLayout from "../../layouts/StudentLayout";
 import PageHeader from "../../components/PageHeader";
 import ProgressBar from "../../components/ProgressBar";
-import Button from "../../components/Button";
-import Icon from "../../components/Icon";
+import { Play, Check, BookOpen } from "lucide-react";
 
 export default function CoursePlayer() {
   const [activeLesson, setActiveLesson] = useState("Lesson 8.1: Decision Trees Classifier");
@@ -25,7 +23,7 @@ export default function CoursePlayer() {
   ];
 
   return (
-    <StudentLayout>
+    <div className="space-y-6">
       <PageHeader
         crumb="STUDENT LMS / PLAYER"
         title="Python for Artificial Intelligence & ML"
@@ -37,57 +35,61 @@ export default function CoursePlayer() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Video Player Main Container */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-slate-900 rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center text-white relative shadow-xl border border-slate-800">
-            <div className="w-16 h-16 rounded-full bg-[#7658df] text-white flex items-center justify-center cursor-pointer shadow-lg hover:scale-105 transition-transform">
-              <Icon name="play" size={28} />
+          <div className="bg-slate-950 rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center text-white relative shadow-xl border border-slate-800">
+            <div className="w-16 h-16 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center cursor-pointer shadow-lg hover:scale-105 transition-transform">
+              <Play className="w-7 h-7 fill-slate-950 ml-1" />
             </div>
-            <p className="mt-3 text-xs font-bold text-gray-300">{activeLesson}</p>
-            <span className="text-[10px] text-gray-500 mt-1">Click to play video stream</span>
+            <p className="mt-3 text-xs font-bold text-slate-300">{activeLesson}</p>
+            <span className="text-[10px] text-slate-500 mt-1">Click to play high-definition lecture stream</span>
           </div>
 
-          <div className="panel flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-bold text-[#25213a] text-base">{activeLesson}</h3>
-              <p className="text-xs text-gray-500">Duration: 42 Mins • Video Lecture & Practical Code</p>
+              <h3 className="font-bold text-slate-900 text-base">{activeLesson}</h3>
+              <p className="text-xs text-slate-500">Duration: 42 Mins • Video Lecture & Practical Jupyter Code</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button
-                variant={completed ? "secondary" : "primary"}
-                icon="check"
+              <button
                 onClick={() => setCompleted(!completed)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  completed
+                    ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                    : "bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-sm"
+                }`}
               >
-                {completed ? "Completed ✓" : "Mark as Complete"}
-              </Button>
+                <Check className="w-4 h-4" />
+                <span>{completed ? "Completed ✓" : "Mark as Complete"}</span>
+              </button>
             </div>
           </div>
         </div>
 
         {/* Sidebar Module List */}
-        <div className="panel space-y-4">
-          <div className="border-b border-gray-100 pb-3">
-            <h3 className="font-bold text-[#25213a] text-base">Course Curriculum</h3>
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs space-y-4">
+          <div className="border-b border-slate-100 pb-3">
+            <h3 className="font-bold text-slate-900 text-base">Course Curriculum</h3>
             <div className="mt-2">
               <ProgressBar value={78} label="Overall Completion" />
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-96 overflow-y-auto">
             {modules.map((m, mIdx) => (
               <div key={mIdx} className="space-y-2">
-                <h4 className="text-xs font-bold text-[#7658df] uppercase">{m.title}</h4>
+                <h4 className="text-[10px] font-bold text-amber-600 uppercase tracking-wider">{m.title}</h4>
                 <div className="space-y-1">
                   {m.lessons.map((les, lIdx) => (
                     <button
                       key={lIdx}
                       onClick={() => setActiveLesson(les)}
-                      className={`w-full text-left p-2.5 rounded-lg text-xs flex items-center gap-2 transition-colors ${
+                      className={`w-full text-left p-2.5 rounded-xl text-xs flex items-center gap-2.5 transition-colors cursor-pointer ${
                         activeLesson === les
-                          ? "bg-[#f0ebff] text-[#684aca] font-bold"
-                          : "hover:bg-gray-50 text-gray-700 font-medium"
+                          ? "bg-amber-50 text-amber-900 font-bold border border-amber-200"
+                          : "hover:bg-slate-50 text-slate-700 font-medium"
                       }`}
                     >
-                      <Icon name="play" size={14} />
-                      <span>{les}</span>
+                      <Play className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="truncate">{les}</span>
                     </button>
                   ))}
                 </div>
@@ -96,7 +98,6 @@ export default function CoursePlayer() {
           </div>
         </div>
       </div>
-    </StudentLayout>
+    </div>
   );
 }
-
