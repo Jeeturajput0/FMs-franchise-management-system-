@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Icon from "../../components/Icon";
+import Icon from "../components/Icon";
 
-export default function LandingPage() {
+export default function Homepage() {
   return (
     <main className="landing">
       <nav className="landing-nav">
