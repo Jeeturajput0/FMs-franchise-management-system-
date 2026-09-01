@@ -37,8 +37,8 @@ export default function SuperAdminDashboard() {
 
       {/* Top Key Stats */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {superAdminStats.map((st, idx) => (
-          <StatCard key={idx} {...st} />
+        {superAdminStats.map((items, index) => (
+          <StatCard key={index} {...items} />
         ))}
       </section>
 
@@ -74,10 +74,10 @@ export default function SuperAdminDashboard() {
         </div>
 
         <div className="divide-y divide-slate-100">
-          {superAdminFranchises.map((fr, index) => (
+          {superAdminFranchises.map((items, index) => (
             <div
-              key={fr.id}
-              onClick={() => navigate(`/admin/franchises/${fr.id}`)}
+              key={items.id}
+              onClick={() => navigate(`/admin/franchises/${items.id}`)}
               className="py-3.5 flex items-center justify-between gap-4 hover:bg-slate-50/80 px-3 -mx-3 rounded-xl transition-colors cursor-pointer group"
             >
               <div className="flex items-center gap-3 min-w-0">
@@ -85,36 +85,36 @@ export default function SuperAdminDashboard() {
                   {`0${index + 1}`}
                 </span>
                 <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xs shrink-0">
-                  {fr.name.slice(0, 2).toUpperCase()}
+                  {items.name.slice(0, 2).toUpperCase()}
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-amber-600 transition-colors truncate">
-                    {fr.name}
+                    {items.name}
                   </h4>
                   <p className="text-[11px] text-slate-400 truncate">
-                    {fr.city} • Owner: <span className="text-slate-600 font-medium">{fr.owner}</span>
+                    {items.city} • Owner: <span className="text-slate-600 font-medium">{items.owner}</span>
                   </p>
                 </div>
               </div>
 
               <div className="hidden sm:flex items-center gap-8 text-right">
                 <div>
-                  <span className="text-xs font-extrabold text-slate-900 block">{fr.students}</span>
+                  <span className="text-xs font-extrabold text-slate-900 block">{items.students}</span>
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Students</span>
                 </div>
                 
                 <div className="w-28 hidden md:block text-left">
                   <div className="flex justify-between text-[10px] font-bold text-slate-600 mb-1">
                     <span>Target</span>
-                    <span>{fr.progress}</span>
+                    <span>{items.progress}</span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-amber-500 rounded-full" style={{ width: fr.progress }}></div>
+                    <div className="h-full bg-amber-500 rounded-full" style={{ width: items.progress }}></div>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <span className="text-xs font-bold text-emerald-600 block">{fr.revenue}</span>
+                  <span className="text-xs font-bold text-emerald-600 block">{items.revenue}</span>
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Revenue</span>
                 </div>
               </div>
