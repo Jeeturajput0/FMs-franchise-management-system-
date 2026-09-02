@@ -1,5 +1,4 @@
 import React from "react";
-import FranchiseOwnerLayout from "../../layouts/FranchiseOwnerLayout";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
 import { franchiseStaff } from "../../data/franchiseOwnerData";
@@ -7,32 +6,31 @@ import { franchiseStaff } from "../../data/franchiseOwnerData";
 export default function Staff() {
   const columns = [
     { header: "Staff ID", accessor: "id" },
-    { header: "Name", accessor: "name" },
-    { header: "Designation / Role", accessor: "role" },
-    { header: "Department", accessor: "dept" },
+    { header: "Staff Member", accessor: "name" },
+    { header: "Designation", accessor: "role" },
+    { header: "Monthly Salary", accessor: "salary" },
     { header: "Contact Number", accessor: "phone" },
     { header: "Status", accessor: "status", isBadge: true },
   ];
 
   return (
-    <FranchiseOwnerLayout>
+    <div className="space-y-6">
       <PageHeader
         crumb="FRANCHISE OWNER / STAFF"
-        title="Center Staff & Operations Team"
-        subtitle="Manage counselor, academic heads, and IT staff members."
-        actionLabel="+ Add Staff Member"
-        onAction={() => alert("Add Staff Member")}
+        title="Center Staff & Faculty Roster"
+        subtitle="Manage center counselors, lab technicians, and local instructors."
+        actionLabel="+ Add Staff"
+        onAction={() => alert("Add Staff")}
       />
 
       <DataTable
-        title="Operational Staff Roster"
-        subtitle="Franchise personnel details"
+        title="Local Center Staff Directory"
+        subtitle="Active personnel and payroll records"
         columns={columns}
         data={franchiseStaff}
         actionButtonLabel="+ Add Staff"
         onActionButtonClick={() => alert("Add Staff")}
       />
-    </FranchiseOwnerLayout>
+    </div>
   );
 }
-

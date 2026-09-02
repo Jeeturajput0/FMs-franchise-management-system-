@@ -1,5 +1,4 @@
 import React from "react";
-import CoachingAdminLayout from "../../layouts/CoachingAdminLayout";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
 import { coachingAdminBatches } from "../../data/coachingAdminData";
@@ -16,11 +15,11 @@ export default function Batches() {
   ];
 
   return (
-    <CoachingAdminLayout>
+    <div className="space-y-6">
       <PageHeader
         crumb="COACHING PORTAL / BATCHES"
         title="Active Study Batches"
-        subtitle="Schedule and organize course cohorts."
+        subtitle="Schedule and organize course cohorts, classroom allocations, and timings."
         actionLabel="+ Create Batch"
         onAction={() => alert("Create Batch")}
       />
@@ -33,7 +32,6 @@ export default function Batches() {
         actionButtonLabel="+ Create Batch"
         onActionButtonClick={() => alert("Create Batch")}
       />
-    </CoachingAdminLayout>
+    </div>
   );
 }
-

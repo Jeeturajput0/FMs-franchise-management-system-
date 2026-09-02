@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import SearchInput from "./SearchInput";
+import { Search, Eye, Edit3, Trash2, ChevronLeft, ChevronRight, Plus, Filter } from "lucide-react";
 import Badge from "./Badge";
-import Button from "./Button";
-import Icon from "./Icon";
 import EmptyState from "./EmptyState";
 
 export default function DataTable({
@@ -19,7 +17,7 @@ export default function DataTable({
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   const filteredData = data.filter((row) => {
     const term = searchTerm.toLowerCase();
@@ -42,46 +40,57 @@ export default function DataTable({
   );
 
   return (
-    <div className="panel bg-white border border-[#ededf3] rounded-xl p-5 shadow-xs">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
+    <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-100">
         <div>
-          {title && <h3 className="text-base font-bold text-[#25213a]">{title}</h3>}
-          {subtitle && <p className="text-xs text-[#858091] mt-0.5">{subtitle}</p>}
+          {title && <h3 className="text-base font-bold text-slate-900">{title}</h3>}
+          {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <SearchInput
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-            placeholder="Search records..."
-            className="w-full sm:w-60"
-          />
-
-          {filterOptions.length > 0 && (
-            <select
-              value={filterValue}
+          <div className="relative w-full sm:w-64">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchTerm}
               onChange={(e) => {
-                setFilterValue(e.target.value);
+                setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="text-xs px-3 py-2 border border-gray-200 rounded-xl bg-white focus:outline-none focus:border-[#7154db]"
-            >
-              <option value="all">All Roles / Status</option>
-              {filterOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
+              placeholder="Search records..."
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-slate-800"
+            />
+          </div>
+
+          {filterOptions.length > 0 && (
+            <div className="relative">
+              <select
+                value={filterValue}
+                onChange={(e) => {
+                  setFilterValue(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="text-xs px-3 py-2 border border-slate-200 rounded-xl bg-slate-50 text-slate-700 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+              >
+                <option value="all">All Roles / Status</option>
+                {filterOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           )}
 
           {actionButtonLabel && (
-            <Button icon="plus" size="sm" onClick={onActionButtonClick}>
-              {actionButtonLabel}
-            </Button>
+            <button
+              type="button"
+              onClick={onActionButtonClick}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold shadow-xs transition-colors cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>{actionButtonLabel}</span>
+            </button>
           )}
         </div>
       </div>
@@ -94,51 +103,49 @@ export default function DataTable({
           onAction={onActionButtonClick}
         />
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded-xl border border-slate-100">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-[#faf9fc] text-[#6c687b] font-bold uppercase border-b border-[#e7e5ed] text-[11px]">
+              <tr className="bg-slate-50 text-slate-500 font-bold uppercase border-b border-slate-200/80 text-[10px] tracking-wider">
                 {columns.map((col, idx) => (
-                  <th key={idx} className="p-3">
+                  <th key={idx} className="p-3.5">
                     {col.header}
                   </th>
                 ))}
-                <th className="p-3 text-right">Actions</th>
+                <th className="p-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f0eff4]">
+            <tbody className="divide-y divide-slate-100">
               {paginatedData.map((row, rIdx) => (
-                <tr key={row.id || rIdx} className="hover:bg-[#fcfbfe] transition-colors">
+                <tr key={row.id || rIdx} className="hover:bg-amber-50/20 transition-colors">
                   {columns.map((col, cIdx) => (
-                    <td key={cIdx} className="p-3 text-[#25213a]">
+                    <td key={cIdx} className="p-3.5 text-slate-800">
                       {col.render ? (
                         col.render(row)
                       ) : col.isBadge ? (
-                        <Badge>{row[col.accessor]}</Badge>
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          {row[col.accessor]}
+                        </span>
                       ) : (
-                        <span className="font-medium">{row[col.accessor]}</span>
+                        <span className="font-semibold">{row[col.accessor]}</span>
                       )}
                     </td>
                   ))}
                   <td className="p-3 text-right">
-                    {renderActions ? (
-                      <div className="flex items-center justify-end gap-1">{renderActions(row)}</div>
-                    ) : (
-                      <div className="flex items-center justify-end gap-1">
-                        <button
-                          title="View Details"
-                          className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
-                        >
-                          <Icon name="eye" size={15} />
-                        </button>
-                        <button
-                          title="Edit"
-                          className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
-                        >
-                          <Icon name="edit" size={15} />
-                        </button>
-                      </div>
-                    )}
+                    <div className="flex items-center justify-end gap-1">
+                      <button
+                        title="View Details"
+                        className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
+                      >
+                        <Icon name="eye" size={15} />
+                      </button>
+                      <button
+                        title="Edit"
+                        className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
+                      >
+                        <Icon name="edit" size={15} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -148,28 +155,28 @@ export default function DataTable({
       )}
 
       {filteredData.length > itemsPerPage && (
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100 text-xs text-gray-500">
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
           <span>
             Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
             {Math.min(currentPage * itemsPerPage, filteredData.length)} of {filteredData.length} entries
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="px-2.5 py-1 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600"
             >
-              Previous
+              <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="px-2 font-semibold text-[#25213a]">
+            <span className="px-2 font-bold text-slate-800">
               {currentPage} / {totalPages}
             </span>
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="px-2.5 py-1 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600"
             >
-              Next
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -177,4 +184,3 @@ export default function DataTable({
     </div>
   );
 }
-

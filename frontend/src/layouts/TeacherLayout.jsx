@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import DashboardSidebar from "../components/dashboard/DashboardSidebar";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import { NAVIGATION_CONFIG } from "../config/navigation";
 import { ROLES } from "../config/roles";
 
-export default function TeacherLayout({ children }) {
+export default function TeacherLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentUser = {
-    name: "Prof. Rajesh Gupta",
-    role: "Teacher Portal",
-    avatar: "RG",
+    name: "Dr. Priya Sen",
+    role: "Lead Instructor",
+    avatar: "PS",
   };
 
   return (
-    <div className="dashboard">
+    <div className="min-h-screen bg-slate-50 flex">
       <DashboardSidebar
         roleTitle="Faculty Portal"
         userRole={ROLES.TEACHER}
@@ -23,14 +24,18 @@ export default function TeacherLayout({ children }) {
         setMobileOpen={setMobileOpen}
       />
 
-      <main className="dashboard-main">
+      <div className="flex-1 lg:ml-[280px] min-h-screen flex flex-col w-full transition-all duration-300">
         <DashboardHeader
           onMobileMenuToggle={() => setMobileOpen(true)}
           user={currentUser}
+          title="Faculty Academic Desk"
+          breadcrumb="Teacher Hub"
         />
 
-        <div className="content">{children}</div>
-      </main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

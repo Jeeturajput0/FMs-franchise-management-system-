@@ -1,5 +1,4 @@
 import React from "react";
-import CoachingAdminLayout from "../../layouts/CoachingAdminLayout";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
 import { coachingAdminStudents } from "../../data/coachingAdminData";
@@ -16,24 +15,23 @@ export default function Students() {
   ];
 
   return (
-    <CoachingAdminLayout>
+    <div className="space-y-6">
       <PageHeader
         crumb="COACHING PORTAL / STUDENTS"
-        title="Institute Students"
-        subtitle="Manage all active student enrollments, batches, and fees."
+        title="Institute Students Roster"
+        subtitle="Manage all active student enrollments, batches, and fee payment status."
         actionLabel="+ Add Student"
         onAction={() => alert("Add Student")}
       />
 
       <DataTable
-        title="Student Roster"
-        subtitle="Enrolled students list"
+        title="Enrolled Center Students"
+        subtitle="Filter by batch, attendance, and fee clearance"
         columns={columns}
         data={coachingAdminStudents}
         actionButtonLabel="+ Add Student"
         onActionButtonClick={() => alert("Add Student")}
       />
-    </CoachingAdminLayout>
+    </div>
   );
 }
-
