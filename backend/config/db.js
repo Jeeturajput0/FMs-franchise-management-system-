@@ -1,13 +1,35 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+
+let isConnected = false;
 
 const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`MongoDB Connection Error: ${error.message}`);
-        process.exit(1);
-    }
+  try {
+    const connection = await mongoose.connect(
+      process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ai-scholar"
+    );
+
+    isConnected = true;
+
+    console.log(
+      `MongoDB Connected: ${connection.connection.host}`
+    );
+
+    return connection;
+  } catch (error) {
+    isConnected = false;
+
+    console.error(
+      "MongoDB connection failed:",
+      error.message
+    );
+    console.warn(
+      "Continuing without MongoDB connection. The app will run in degraded mode until MongoDB is reachable."
+    );
+
+    return null;
+  }
 };
 
-module.exports = connectDB;
+export const isDbConnected = () => isConnected;
+
+export default connectDB;

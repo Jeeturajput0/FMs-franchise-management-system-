@@ -14,6 +14,7 @@ export default function DataTable({
   actionButtonLabel,
   onActionButtonClick,
   filterOptions = [],
+  renderActions,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
@@ -120,20 +121,24 @@ export default function DataTable({
                     </td>
                   ))}
                   <td className="p-3 text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        title="View Details"
-                        className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
-                      >
-                        <Icon name="eye" size={15} />
-                      </button>
-                      <button
-                        title="Edit"
-                        className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
-                      >
-                        <Icon name="edit" size={15} />
-                      </button>
-                    </div>
+                    {renderActions ? (
+                      <div className="flex items-center justify-end gap-1">{renderActions(row)}</div>
+                    ) : (
+                      <div className="flex items-center justify-end gap-1">
+                        <button
+                          title="View Details"
+                          className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
+                        >
+                          <Icon name="eye" size={15} />
+                        </button>
+                        <button
+                          title="Edit"
+                          className="p-1.5 rounded-lg text-gray-400 hover:text-[#7154db] hover:bg-[#f0ebff] transition-colors"
+                        >
+                          <Icon name="edit" size={15} />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
